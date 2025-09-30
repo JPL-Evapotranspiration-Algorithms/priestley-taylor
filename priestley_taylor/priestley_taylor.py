@@ -1,6 +1,6 @@
 from typing import Union
 from datetime import datetime
-import check_distribution
+from check_distribution import check_distribution
 import numpy as np
 from verma_net_radiation import verma_net_radiation
 from SEBAL_soil_heat_flux import calculate_SEBAL_soil_heat_flux
