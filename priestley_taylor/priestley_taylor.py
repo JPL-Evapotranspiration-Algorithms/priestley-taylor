@@ -131,7 +131,8 @@ def priestley_taylor(
     resampling: str = RESAMPLING_METHOD,
     PT_alpha: float = PT_ALPHA,
     delta_Pa: Union[Raster, np.ndarray] = None,
-    gamma_Pa: Union[Raster, np.ndarray, float] = GAMMA_PA
+    gamma_Pa: Union[Raster, np.ndarray, float] = GAMMA_PA,
+    epsilon: Union[Raster, np.ndarray] = None
 ) -> Union[Raster, np.ndarray]:
     """
     Calculate the potential latent heat flux (LE) using the Priestley-Taylor equation.
@@ -221,11 +222,13 @@ def priestley_taylor(
     check_distribution(G_Wm2, "G_Wm2")
     results["G_Wm2"] = G_Wm2    
 
-    epsilon = epsilon_from_Ta_C(
-        Ta_C=Ta_C, 
-        delta_Pa=delta_Pa,
-        gamma_Pa=gamma_Pa
-    )
+    if epsilon is None:
+        # Calculate epsilon from air temperature
+        epsilon = epsilon_from_Ta_C(
+            Ta_C=Ta_C, 
+            delta_Pa=delta_Pa,
+            gamma_Pa=gamma_Pa
+        )
 
     check_distribution(epsilon, "epsilon")
     results["epsilon"] = epsilon
