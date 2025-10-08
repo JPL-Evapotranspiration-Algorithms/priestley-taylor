@@ -29,11 +29,11 @@ The Priestley-Taylor equation for potential latent heat flux is:
 **LE = α × ε × (Rn - G)**
 
 Where:
-- **LE** = Latent heat flux [$\text{W}\,\text{m}^{-2}$] - energy used for evapotranspiration
+- **LE** = Latent heat flux [W m⁻²] - energy used for evapotranspiration
 - **α** = Priestley-Taylor coefficient [dimensionless] - typically 1.26 for well-watered vegetation
 - **ε** = Energy partitioning coefficient [dimensionless] - fraction of available energy converted to latent heat under equilibrium
-- **Rn** = Net radiation [$\text{W}\,\text{m}^{-2}$] - total radiative energy available at the surface
-- **G** = Soil heat flux [$\text{W}\,\text{m}^{-2}$] - energy conducted into or out of the soil
+- **Rn** = Net radiation [W m⁻²] - total radiative energy available at the surface
+- **G** = Soil heat flux [W m⁻²] - energy conducted into or out of the soil
 
 ### Step-by-Step Methodology
 
@@ -44,12 +44,12 @@ The slope of the saturation vapor pressure curve quantifies how rapidly the atmo
 **Δ = 4098 × [0.6108 × exp(17.27 × Ta / (237.3 + Ta))] / (Ta + 237.3)²**
 
 Where:
-- **Δ** = Slope of saturation vapor pressure curve [$\text{kPa}\,°\text{C}^{-1}$ or $\text{Pa}\,°\text{C}^{-1}$]
-- **Ta** = Air temperature [$°\text{C}$]
+- **Δ** = Slope of saturation vapor pressure curve [kPa °C⁻¹ or Pa °C⁻¹]
+- **Ta** = Air temperature [°C]
 - **4098** = Derived coefficient from differentiation [dimensionless]
-- **0.6108** = Magnus-Tetens coefficient [$\text{kPa}$]
+- **0.6108** = Magnus-Tetens coefficient [kPa]
 - **17.27** = Magnus-Tetens temperature coefficient [dimensionless]
-- **237.3** = Magnus-Tetens temperature offset [$°\text{C}$]
+- **237.3** = Magnus-Tetens temperature offset [°C]
 
 *Scientific rationale:* This relationship is derived from the Clausius-Clapeyron equation combined with the Magnus-Tetens approximation, providing accurate vapor pressure calculations for temperatures from -40°C to +50°C (Murray, 1967).
 
@@ -57,14 +57,14 @@ Where:
 
 The psychrometric constant relates vapor pressure changes to temperature in the context of evaporation:
 
-**γ = (cp × P) / (ε × λ) = 0.0662 [$\text{kPa}\,°\text{C}^{-1}$] at standard conditions**
+**γ = (cp × P) / (ε × λ) = 0.0662 [kPa °C⁻¹] at standard conditions**
 
 Where:
-- **γ** = Psychrometric constant [$\text{kPa}\,°\text{C}^{-1}$ or $\text{Pa}\,°\text{C}^{-1}$]
-- **cp** = Specific heat of moist air ≈ 1.013 [$\text{kJ}\,(\text{kg}\,°\text{C})^{-1}$]
-- **P** = Atmospheric pressure [$\text{kPa}$] - 101.3 kPa at sea level
+- **γ** = Psychrometric constant [kPa °C⁻¹ or Pa °C⁻¹]
+- **cp** = Specific heat of moist air ≈ 1.013 [kJ (kg °C)⁻¹]
+- **P** = Atmospheric pressure [kPa] - 101.3 kPa at sea level
 - **ε** = Ratio of molecular weights (water vapor/dry air) = 0.622 [dimensionless]
-- **λ** = Latent heat of vaporization ≈ 2.45 [$\text{MJ}\,\text{kg}^{-1}$] at 20°C
+- **λ** = Latent heat of vaporization ≈ 2.45 [MJ kg⁻¹] at 20°C
 
 *Scientific rationale:* This parameter represents the fundamental thermodynamic relationship between sensible and latent heat in the atmosphere, derived from the kinetic theory of gases (Monteith & Unsworth, 2013).
 
@@ -99,11 +99,11 @@ The empirical coefficient accounts for non-equilibrium conditions and surface ch
 Rn = (SWin - SWout) + (LWin - LWout) = SWin(1-α) + εσ(Ta⁴ - Ts⁴)
 
 Where:
-- **SWin** = Incoming shortwave radiation [$\text{W}\,\text{m}^{-2}$]
+- **SWin** = Incoming shortwave radiation [W m⁻²]
 - **α** = Surface albedo [dimensionless, 0-1]
 - **ε** = Surface emissivity [dimensionless, 0.85-0.99]
-- **σ** = Stefan-Boltzmann constant = $5.67\times10^{-8}$ [$\text{W}\,(\text{m}^2\,\text{K}^4)^{-1}$]
-- **Ta, Ts** = Air and surface temperatures [$\text{K}$]
+- **σ** = Stefan-Boltzmann constant = 5.67×10⁻⁸ [W (m² K⁴)⁻¹]
+- **Ta, Ts** = Air and surface temperatures [K]
 
 **Soil Heat Flux (G):**
 Typically estimated as G ≈ 0.1 × Rn for daily averages, or calculated using empirical relationships with vegetation indices and surface temperature.
@@ -148,14 +148,14 @@ import priestley_taylor
 ### 1. `GAMMA_KPA` and `GAMMA_PA`
 - **Description:** Psychrometric constant (γ) representing the fundamental thermodynamic relationship between vapor pressure and temperature in atmospheric evaporation processes.
 - **Values:** 
-  - `GAMMA_KPA = 0.0662` [$\text{kPa}\,°\text{C}^{-1}$] - Standard conditions (101.3 kPa, 20°C)
-  - `GAMMA_PA = 66.2` [$\text{Pa}\,°\text{C}^{-1}$] - SI unit equivalent
+  - `GAMMA_KPA = 0.0662` [kPa °C⁻¹] - Standard conditions (101.3 kPa, 20°C)
+  - `GAMMA_PA = 66.2` [Pa °C⁻¹] - SI unit equivalent
 - **Physical meaning:** Ratio of specific heat of moist air to latent heat of vaporization, multiplied by the molecular weight ratio of water vapor to dry air
 - **Formula:** γ = (cp × P) / (ε × λ)
-  - cp = specific heat of moist air ≈ 1.013 [$\text{kJ}\,(\text{kg}\,°\text{C})^{-1}$]
-  - P = atmospheric pressure [$\text{kPa}$]
+  - cp = specific heat of moist air ≈ 1.013 [kJ (kg °C)⁻¹]
+  - P = atmospheric pressure [kPa]
   - ε = molecular weight ratio = 0.622 [dimensionless]
-  - λ = latent heat of vaporization ≈ 2.45 [$\text{MJ}\,\text{kg}^{-1}$]
+  - λ = latent heat of vaporization ≈ 2.45 [MJ kg⁻¹]
 - **Elevation dependency:** γ(P) = 0.0662 × (P/101.3) for pressure corrections
 - **References:** 
   - Allen, R. G., Pereira, L. S., Raes, D., & Smith, M. (1998). FAO Irrigation and Drainage Paper 56, Table 2.2
@@ -165,13 +165,13 @@ import priestley_taylor
 - **Description:** Calculates the slope of the saturation vapor pressure curve (Δ) using the Magnus-Tetens approximation, representing how rapidly atmospheric water-holding capacity increases with temperature.
 - **Formula:** Δ = 4098 × [0.6108 × exp(17.27 × Ta / (237.3 + Ta))] / (Ta + 237.3)²
 - **Parameters:** 
-  - `Ta_C` (numpy array or Raster): Air temperature [$°\text{C}$], valid range: -40 to +50°C
-- **Returns:** Slope of saturation vapor pressure curve [$\text{kPa}\,°\text{C}^{-1}$], always positive
+  - `Ta_C` (numpy array or Raster): Air temperature [°C], valid range: -40 to +50°C
+- **Returns:** Slope of saturation vapor pressure curve [kPa °C⁻¹], always positive
 - **Physical significance:** Higher temperatures exponentially increase evaporative demand
 - **Typical values:**
-  - 0°C: Δ ≈ 0.189 [$\text{kPa}\,°\text{C}^{-1}$]
-  - 20°C: Δ ≈ 1.45 [$\text{kPa}\,°\text{C}^{-1}$]
-  - 40°C: Δ ≈ 3.99 [$\text{kPa}\,°\text{C}^{-1}$]
+  - 0°C: Δ ≈ 0.189 [kPa °C⁻¹]
+  - 20°C: Δ ≈ 1.45 [kPa °C⁻¹]
+  - 40°C: Δ ≈ 3.99 [kPa °C⁻¹]
 - **Applications:** Central to all combination evapotranspiration equations (Penman, Priestley-Taylor, Penman-Monteith)
 - **References:**
   - Allen et al. (1998), Equation 2.18 - FAO-56 standard methodology
@@ -180,14 +180,14 @@ import priestley_taylor
 
 ### 3. `delta_Pa_from_Ta_C(Ta_C)`
 - **Description:** Calculates the slope of saturation vapor pressure curve in SI base units (Pascals) for consistency with meteorological modeling systems.
-- **Unit conversion:** Δ[$\text{Pa}\,°\text{C}^{-1}$] = Δ[$\text{kPa}\,°\text{C}^{-1}$] × 1000 (exact conversion)
+- **Unit conversion:** Δ[Pa °C⁻¹] = Δ[kPa °C⁻¹] × 1000 (exact conversion)
 - **Parameters:** 
-  - `Ta_C` (numpy array or Raster): Air temperature [$°\text{C}$]
-- **Returns:** Slope of saturation vapor pressure curve [$\text{Pa}\,°\text{C}^{-1}$]
+  - `Ta_C` (numpy array or Raster): Air temperature [°C]
+- **Returns:** Slope of saturation vapor pressure curve [Pa °C⁻¹]
 - **Typical values:**
-  - 0°C: Δ ≈ 189 [$\text{Pa}\,°\text{C}^{-1}$]
-  - 20°C: Δ ≈ 1450 [$\text{Pa}\,°\text{C}^{-1}$]
-  - 40°C: Δ ≈ 3990 [$\text{Pa}\,°\text{C}^{-1}$]
+  - 0°C: Δ ≈ 189 [Pa °C⁻¹]
+  - 20°C: Δ ≈ 1450 [Pa °C⁻¹]
+  - 40°C: Δ ≈ 3990 [Pa °C⁻¹]
 - **Applications:** Preferred for models using Pascal pressure units throughout calculations
 - **References:**
   - International System of Units (SI), BIPM (2019)
@@ -197,7 +197,7 @@ import priestley_taylor
 - **Description:** Computes the dimensionless energy partitioning coefficient (ε) that determines the theoretical fraction of available energy converted to latent heat under equilibrium conditions.
 - **Formula:** ε = Δ / (Δ + γ)
 - **Parameters:**
-  - `delta` (numpy array or Raster): Vapor pressure slope [$\text{Pa}\,°\text{C}^{-1}$ or $\text{kPa}\,°\text{C}^{-1}$]
+  - `delta` (numpy array or Raster): Vapor pressure slope [Pa °C⁻¹ or kPa °C⁻¹]
   - `gamma` (numpy array or Raster): Psychrometric constant [same units as delta]
 - **Returns:** Epsilon [dimensionless], range: 0 < ε < 1
 - **Physical interpretation:** 
@@ -216,11 +216,11 @@ import priestley_taylor
 
 ### 5. `epsilon_from_Ta_C(Ta_C, delta_Pa=None, gamma_Pa=GAMMA_PA)`
 - **Description:** Direct calculation of energy partitioning coefficient from air temperature, combining vapor pressure slope calculation with epsilon computation for computational efficiency.
-- **Process flow:** Ta[$°\text{C}$] → Δ[$\text{Pa}\,°\text{C}^{-1}$] → ε[dimensionless]
+- **Process flow:** Ta[°C] → Δ[Pa °C⁻¹] → ε[dimensionless]
 - **Parameters:**
-  - `Ta_C` (numpy array or Raster): Air temperature [$°\text{C}$], valid range: -40 to +50°C
-  - `delta_Pa` (optional): Pre-computed vapor pressure slope [$\text{Pa}\,°\text{C}^{-1}$] for efficiency
-  - `gamma_Pa` (float/array): Psychrometric constant [$\text{Pa}\,°\text{C}^{-1}$], default: 66.2 Pa/°C
+  - `Ta_C` (numpy array or Raster): Air temperature [°C], valid range: -40 to +50°C
+  - `delta_Pa` (optional): Pre-computed vapor pressure slope [Pa °C⁻¹] for efficiency
+  - `gamma_Pa` (float/array): Psychrometric constant [Pa °C⁻¹], default: 66.2 Pa/°C
 - **Returns:** Epsilon [dimensionless], typical range: 0.4-0.99
 - **Example values:**
   - 0°C: ε ≈ 0.741
@@ -236,9 +236,9 @@ import priestley_taylor
 - **Description:** Main function implementing the complete Priestley-Taylor methodology for potential evapotranspiration estimation with automatic data retrieval and energy balance calculations.
 - **Core equation:** LE = α × ε × (Rn - G)
 - **Key parameters:**
-  - `Ta_C`: Air temperature [$°\text{C}$] - drives vapor pressure relationships
-  - `Rn_Wm2`: Net radiation [$\text{W}\,\text{m}^{-2}$] - primary energy source
-  - `G_Wm2`: Soil heat flux [$\text{W}\,\text{m}^{-2}$] - energy not available for ET
+  - `Ta_C`: Air temperature [°C] - drives vapor pressure relationships
+  - `Rn_Wm2`: Net radiation [W m⁻²] - primary energy source
+  - `G_Wm2`: Soil heat flux [W m⁻²] - energy not available for ET
   - `PT_alpha`: Priestley-Taylor coefficient [dimensionless], default: 1.26
   - `ST_C`, `albedo`, `emissivity`: Surface properties for radiation calculations
   - `NDVI`: Vegetation index for soil heat flux estimation
